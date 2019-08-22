@@ -1,22 +1,22 @@
 {
-  "name": "acquia/memcache-settings",
-  "description": "Recommended Memcache settings for use with Acquia hosting.",
-  "type": "library",
-  "license": "GPL-2.0+",
-  "authors": [
-    {
-      "name": "Acquia Engineering",
-      "homepage": "https://www.acquia.com",
-      "role": "Maintainer"
-    }
-  ],
-  "repositories": {
+    "name": "acquia/memcache-settings",
+    "type": "library",
+    "description": "Recommended Memcache settings for use with Acquia hosting.",
+    "license": "GPL-2.0+",
+    "authors": [
+        {
+            "name": "Acquia Engineering",
+            "homepage": "https://www.acquia.com",
+            "role": "Maintainer"
+        }
+    ],
+    "require": {
+        "drupal/memcache": "^2.0"
+    },
+    "repositories": {
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
         }
-  },
-  "require": {
-    "drupal/memcache": "^2.0"
-  }
+    }
 }
