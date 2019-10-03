@@ -82,6 +82,10 @@ if (getenv('AH_SITE_ENVIRONMENT') &&
             'factory' => ['@memcache.factory', 'get'],
             'arguments' => ['container'],
           ],
+          'lock.container' => [
+            'class' => 'Drupal\memcache\Lock\MemcacheLockBackend',
+            'arguments' => ['container', '@memcache.backend.cache.container'],
+          ],
           'cache_tags_provider.container' => [
             'class' => 'Drupal\Core\Cache\DatabaseCacheTagsChecksum',
             'arguments' => ['@database'],
@@ -93,7 +97,6 @@ if (getenv('AH_SITE_ENVIRONMENT') &&
               '@memcache.backend.cache.container',
               '@cache_tags_provider.container',
               '@memcache.timestamp.invalidator.bin',
-              '@memcache.settings',
             ],
           ],
         ],
