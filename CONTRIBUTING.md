@@ -1,5 +1,8 @@
 # Contributing to Memcache Settings
-Memcache Settings feature requests, bugs, support requests, and milestones are tracked via the [Memcache Settings GitHub issue queue](https://github.com/acquia/memcache-settings/issues).
+
+**Please do not submit Github issues or pull requests unless they are strictly related to the Composer integration.**
+
+For any memache-related issues, including issues with the recommended memcache settings, please contact Acquia Support. As noted in the readme, this repository is merely a mirror of the memcache configuration recommendations on docs.acquia.com. The maintainers of this repository cannot provide any memcache-related support.
 
 Before submitting an issue or pull request, please read and take the time to understand this guide. Issues not adhering to these guidelines may be closed.
 
