@@ -24,7 +24,7 @@ Note that if you use [Acquia BLT](https://github.com/acquia/blt), this step is u
 
 # License
 
-Copyright (C) 2019 Acquia, Inc.
+Copyright (C) 2020 Acquia, Inc.
 
 This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License version 2 as published by the Free Software Foundation.
 
