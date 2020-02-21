@@ -45,8 +45,16 @@ if (getenv('AH_SITE_ENVIRONMENT') &&
       // Set key_prefix to avoid drush cr flushing all bins on multisite.
       $settings['memcache']['key_prefix'] = $conf['acquia_hosting_site_info']['db']['name'] . '_';
 
-      // Settings for SASL Authenticated Memcached.
-      $settings['memcache']['options'][Memcached::OPT_BINARY_PROTOCOL] = TRUE;
+      // Settings for SASL Authenticated Memcached needed for ODEs.
+      // It is needed for ODEs since they still use SASL auth.
+      // On non-ODEs this causes a MASSIVE performance drag see:
+      // https://github.com/acquia/memcache-settings/issues/3
+      $ah_env = isset($_ENV['AH_SITE_ENVIRONMENT']) ? $_ENV['AH_SITE_ENVIRONMENT'] : NULL;
+      $is_ode = (strpos($ah_env, 'ode') !== FALSE);
+
+      if ($is_ode) {
+        $settings['memcache']['options'][Memcached::OPT_BINARY_PROTOCOL] = TRUE;
+      }
 
       // Bootstrap cache.container with memcache rather than database.
       $settings['bootstrap_container_definition'] = [
