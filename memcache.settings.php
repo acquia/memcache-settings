@@ -26,6 +26,14 @@ if (getenv('AH_SITE_ENVIRONMENT') &&
   $memcached_exists = class_exists('Memcached', FALSE);
   $memcache_services_yml = DRUPAL_ROOT . '/modules/contrib/memcache/memcache.services.yml';
   $memcache_module_is_present = file_exists($memcache_services_yml);
+  $module_path = DRUPAL_ROOT . '/modules/contrib/memcache';
+
+  // On Acquia environment we have contrib modules inside sites directory.
+  if (!$memcache_module_is_present && !empty($site_dir)) {
+    $memcache_services_yml = DRUPAL_ROOT . '/sites/' . $site_dir . '/modules/contrib/memcache/memcache.services.yml';
+    $memcache_module_is_present = file_exists($memcache_services_yml);
+    $module_path = DRUPAL_ROOT . '/sites/' . $site_dir . '/modules/contrib/memcache';
+  }
   if ($memcache_module_is_present && ($memcache_exists || $memcached_exists)) {
     // Use Memcached extension if available.
     if ($memcached_exists) {
@@ -33,7 +41,7 @@ if (getenv('AH_SITE_ENVIRONMENT') &&
     }
     if (class_exists(ClassLoader::class)) {
       $class_loader = new ClassLoader();
-      $class_loader->addPsr4('Drupal\\memcache\\', DRUPAL_ROOT . '/modules/contrib/memcache/src');
+      $class_loader->addPsr4('Drupal\\memcache\\', $module_path . '/src');
       $class_loader->register();
       $settings['container_yamls'][] = $memcache_services_yml;
 
