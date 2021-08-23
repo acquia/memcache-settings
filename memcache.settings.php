@@ -99,9 +99,10 @@ if (getenv('AH_SITE_ENVIRONMENT') &&
         ],
       ];
 
-      // Content Hub 2.x requires the Depcalc module which needs to use the database backend.
+      // Content Hub 2.x requires the Depcalc module which needs to use the
+      // database backend.
       $settings['cache']['bins']['depcalc'] = 'cache.backend.database';
-      
+
       // Use memcache for bootstrap, discovery, config instead of fast chained
       // backend to properly invalidate caches on multiple webs.
       // See https://www.drupal.org/node/2754947
