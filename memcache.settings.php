@@ -5,8 +5,8 @@
  * Contains caching configuration.
  */
 
-use Composer\Autoload\ClassLoader;
 use Acquia\Blt\Robo\Common\EnvironmentDetector;
+use Composer\Autoload\ClassLoader;
 
 /**
  * Use memcache as cache backend.
