@@ -30,12 +30,14 @@ if (getenv('AH_SITE_ENVIRONMENT') &&
   $module_path = DRUPAL_ROOT . '/modules/contrib/memcache';
 
   // On Acquia environment we have contrib modules inside sites directory.
-  if (!$memcache_module_is_present && !empty($site_dir)) {
+  if (!$memcache_module_is_present) {
     // $site_path is always set and exposed by the Drupal Kernel.
     $site_name = EnvironmentDetector::getSiteName($site_path);
-    $memcache_services_yml = DRUPAL_ROOT . '/sites/' . $site_name . '/modules/contrib/memcache/memcache.services.yml';
-    $memcache_module_is_present = file_exists($memcache_services_yml);
-    $module_path = DRUPAL_ROOT . '/sites/' . $site_name . '/modules/contrib/memcache';
+    if (!empty($site_name)) {
+      $memcache_services_yml = DRUPAL_ROOT . '/sites/' . $site_name . '/modules/contrib/memcache/memcache.services.yml';
+      $memcache_module_is_present = file_exists($memcache_services_yml);
+      $module_path = DRUPAL_ROOT . '/sites/' . $site_name . '/modules/contrib/memcache';
+    }
   }
   if ($memcache_module_is_present && ($memcache_exists || $memcached_exists)) {
     // Use Memcached extension if available.
