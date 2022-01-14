@@ -13,6 +13,11 @@
     "require": {
         "drupal/memcache": "^2.0"
     },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "1.x-dev"
+        }
+    },
     "repositories": {
         "drupal": {
             "type": "composer",
