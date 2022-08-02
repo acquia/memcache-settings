@@ -1,6 +1,10 @@
 ---
 name: ORCA CI
-on: [ push, pull_request ]
+on:
+  push: ~
+  pull_request: ~
+  schedule:
+    - cron: "0 0 * * *"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -8,7 +12,6 @@ jobs:
       ORCA_SUT_NAME: acquia/memcache-settings
       ORCA_SUT_BRANCH: master
       ORCA_VERSION: ^3
-      ORCA_PACKAGES_CONFIG_ALTER: ../memcache-settings/packages_alter.yml
       ORCA_JOB: ${{ matrix.orca-job }}
       ORCA_COVERALLS_ENABLE: ${{ matrix.coveralls-enable }}
       COVERALLS_REPO_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -43,8 +46,8 @@ jobs:
             php-version: "8.0"
             coveralls-enable: "FALSE"
           - orca-job: ISOLATED_TEST_ON_CURRENT
-            php-version: "7.3"
-            coveralls-enable: "TRUE"
+            php-version: "8.1"
+            coveralls-enable: "FALSE"
 
     steps:
       - uses: actions/checkout@v2
@@ -82,3 +85,10 @@ jobs:
       - name: After failure
         if: ${{ failure() }}
         run: ../orca/bin/ci/after_failure.sh
+
+  all-successful:
+    runs-on: ubuntu-latest
+    needs: [build]
+    steps:
+    - name: All checks successful
+      run: echo "🎉"
