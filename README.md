@@ -1,7 +1,7 @@
 Acquia Memcache settings
 ====
 
-This is a Composer package providing a recommended set of Memcache settings for use with Acquia Cloud and Acquia Cloud Site Factory.
+This is a Composer package providing a recommended set of Memcache settings for use with **Acquia Cloud Classic** and **Acquia Cloud Site Factory**. This package is not required for **Acquia Cloud Next** applications, as Acquia Cloud Next manages memcache configuration automatically.
 
 These settings are continuously updated based on the [publicly available documentation](https://docs.acquia.com/acquia-cloud/performance/memcached/enable/).
 
