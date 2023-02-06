@@ -5,24 +5,11 @@ on:
       - "completed"
     workflows:
       - "ORCA CI"
+
+permissions:
+  contents: write
+  pull-requests: write
+
 jobs:
-  merge:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      pull-requests: write
-    if: >-
-      github.event.workflow_run.event == 'pull_request' &&
-      github.event.workflow_run.conclusion == 'success' &&
-      github.event.workflow_run.actor.login == 'dependabot[bot]'
-    steps:
-    - name: "Get PR information"
-      uses: potiuk/get-workflow-origin@v1_4
-      id: source-run-info
-      with:
-        token: ${{ secrets.GITHUB_TOKEN }}
-        sourceRunId: ${{ github.event.workflow_run.id }}
-    - run: 'gh pr merge --squash https://github.com/$GITHUB_REPOSITORY/pull/$GITHUB_PR'
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        GITHUB_PR: ${{ steps.source-run-info.outputs.pullRequestNumber }}
+  automerge:
+    uses: acquia/cli/.github/workflows/automerge.yml@main
